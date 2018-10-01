@@ -10,6 +10,8 @@ namespace AirlineReservationSys {
 	class Database {
 	public:
 
+		const int kFirstFlight = 1;
+
 		Passenger& addPassenger(const std::string& firstName,
 			const std::string& lastName, const int& Age);
 
@@ -26,6 +28,9 @@ namespace AirlineReservationSys {
 		
 		FlightDB& getMatchingFlight(const std::string& FromCity,
 			const std::string& ToCity);
+
+		FlightDB& getMatchingFlight(int FlightNum);
+
 
 		/*FlightDB& getMatchingFlight(const std::string& Airlines, 
 			const std::string& FromCity,
@@ -45,13 +50,13 @@ namespace AirlineReservationSys {
 		//void displayWeekendFlights() const;
 		void displayAllFlights() const;
 		void displayAllPassengers() const;
-
+		//void displayBookedFlight() const;
+		
 	private:
 		std::vector<FlightDB> mFlights;
 		std::vector<Passenger> mPassengers;
+		int mFlightNum = kFirstFlight;
 		
-
-
 
 	};
 

@@ -15,15 +15,16 @@ namespace AirlineReservationSys {
 
 	}
 
-	FlightDB& Database::addFlight(const std::string& Airlines, 
+	FlightDB& Database::addFlight(const std::string& Airlines,
 		const std::string& FromCity,
-		const std::string& ToCity){
-		FlightDB theFlight(Airlines,FromCity,ToCity);
+		const std::string& ToCity) {
+		FlightDB theFlight(Airlines, FromCity, ToCity);
+		theFlight.setFlightNumber(mFlightNum++);
 		mFlights.push_back(theFlight);
 		return mFlights[mFlights.size() - 1];
-		
+
 	}
-	
+
 	FlightDB& Database::getMatchingFlight(const std::string& Airlines) {
 		for (auto& flight : mFlights) {
 			if (flight.getAirlines() == Airlines) {
@@ -31,6 +32,7 @@ namespace AirlineReservationSys {
 				return flight;
 			}
 		}
+
 		throw logic_error("No matching flight found. ");
 	}
 
@@ -43,11 +45,22 @@ namespace AirlineReservationSys {
 				flight.displayFlightInfo();
 				return flight;
 			}
-			//flight.displayFlightInfo();
+			
 			throw logic_error("No matching flight found. ");
 		}
 	}
 
+	FlightDB& Database::getMatchingFlight(int FlightNum)
+	{
+		for (auto& flight : mFlights) {
+			if (flight.getFlightNumber() == FlightNum)
+			{
+				flight.displayFlightInfo();
+				return flight;
+			}
+			throw logic_error("No matching flight found. ");
+		}
+	}
 
 
 	Passenger& Database::getPassenger(const std::string& firstName,
@@ -62,13 +75,33 @@ namespace AirlineReservationSys {
 	}
 
 	void Database::inputBookingReq(const std::string& FromCity,
-		const std::string& ToCity){ 
+		const std::string& ToCity) {
 		for (auto& passenger : mPassengers) {
 			passenger.setFromCity(FromCity);
-			passenger.setToCity(ToCity);	
+			passenger.setToCity(ToCity);
 		}
-		
+
 	}
+
+	void Database::displayAllFlights() const {
+		for (const auto& flight : mFlights) {
+			flight.displayFlightInfo();
+		}
+	}
+
+	void Database::displayAllPassengers() const {
+		for (const auto& passenger : mPassengers) {
+			passenger.displayPassengerInfo();
+		}
+	}
+	/*
+	void Database::displayBookedFlight() const {
+		for (const auto& flight : mFlights) {
+			if (flight.isBooked())
+				flight.displayFlightInfo();
+
+		}
+	}*/
 
 	/*Passenger& Database::inputBookingReq(const std::string& FromCity,
 										const std::string& ToCity) {
@@ -80,29 +113,20 @@ namespace AirlineReservationSys {
 
 	}*/
 
-/*
-	void Database::displayWeekdayFlights() const {
-		for (const auto& flight:mFlights) {
-			if (flight.IsWeekDayFlight())
-				flight.displayFlightInfo();
-		}
-	}*/
 	/*
-	void Database::displayWeekendFlights() const {
-		for (const auto& flight : mFlights) {
-			if (!flight.IsWeekDayFlight())
-				flight.displayFlightInfo();
-		}
-	}*/
+		void Database::displayWeekdayFlights() const {
+			for (const auto& flight:mFlights) {
+				if (flight.IsWeekDayFlight())
+					flight.displayFlightInfo();
+			}
+		}*/
+		/*
+		void Database::displayWeekendFlights() const {
+			for (const auto& flight : mFlights) {
+				if (!flight.IsWeekDayFlight())
+					flight.displayFlightInfo();
+			}
+		}*/
 
-	void Database::displayAllFlights() const {
-		for (const auto& flight : mFlights) {
-			flight.displayFlightInfo();
-		}
-	}
-	void Database::displayAllPassengers() const {
-		for (const auto& passenger : mPassengers) {
-			passenger.displayPassengerInfo();
-		}
-	}
+
 }

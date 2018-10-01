@@ -36,13 +36,18 @@ namespace AirlineReservationSys {
 		const std::string& getToCity() const;
 		void setToCity(const std::string& ToCity);
 
+		bool isMatch();
+		bool isBooked();
+
+		void book();
+
+		void match();
 
 		void displayFlightInfo() const;
-		bool IsWeekDayFlight() const;
-		void weekDayFlights();
-		void weekendFlights();
-		
 
+		void setFlightNumber(int FlightNum);
+		int getFlightNumber() const;
+		
 	private:
 		/*
 		std::vector<Passenger> mPassengers;
@@ -51,10 +56,9 @@ namespace AirlineReservationSys {
 		std::string mAirlines;
 		std::string mFromCity;
 		std::string mToCity;
-		bool mweekDay= true;
-
-
-
+		bool mMatch = false;
+		bool mBooked = false;
+		int mFlightNum = -1;
 	};
 
 }

@@ -11,7 +11,7 @@ namespace AirlineReservationSys {
 		const std::string& ToCity,
 		bool weekDay) : mAirlines(Airlines), mFromCity(FromCity), mToCity(ToCity), mweekDay(weekDay) {
 	}*/
-	
+
 	FlightDB::FlightDB(const std::string& Airlines,
 		const std::string& FromCity,
 		const std::string& ToCity) : mAirlines(Airlines), mFromCity(FromCity), mToCity(ToCity) {}
@@ -38,21 +38,37 @@ namespace AirlineReservationSys {
 	void FlightDB::setToCity(const string& ToCity) {
 		mToCity = ToCity;
 	}
-	
-	bool FlightDB::IsWeekDayFlight() const {
-		return mweekDay;
+
+	bool FlightDB::isMatch() {
+		return mMatch;
 	}
 
-	void FlightDB::weekDayFlights() {
-		mweekDay = true;
+	bool FlightDB::isBooked() {
+
+		return mBooked;
 	}
-	void FlightDB::weekendFlights() {
-		mweekDay = false;
+	
+	void FlightDB::book()
+	{
+		mBooked = true;
 	}
+
+	void FlightDB::match() {
+		mMatch = true;
+	}
+	void FlightDB::setFlightNumber(int FlightNum) {
+		mFlightNum = FlightNum;
+	}
+
+	int FlightDB::getFlightNumber() const {
+		return mFlightNum;
+	}
+
 	void FlightDB::displayFlightInfo() const {
 		cout << "Airlines is " << getAirlines() << endl;
 		cout << "Flight Origin City is " << getFromCity() << endl;
 		cout << "Flight Destination City is " << getToCity() << endl;
+		cout << "Flight number is " << getFlightNumber() << endl;
 		//cout << (IsWeekDayFlight() ? "This is a Weekday flight " : "This is a Weekend Flight ") << endl;
 		cout << endl;
 
