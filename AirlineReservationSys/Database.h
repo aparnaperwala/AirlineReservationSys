@@ -10,7 +10,7 @@ namespace AirlineReservationSys {
 	class Database {
 	public:
 
-		const int kFirstFlight = 1;
+		const int kFirstFlightNum = 100;
 
 		Passenger& addPassenger(const std::string& firstName,
 			const std::string& lastName, const int& Age);
@@ -55,7 +55,7 @@ namespace AirlineReservationSys {
 	private:
 		std::vector<FlightDB> mFlights;
 		std::vector<Passenger> mPassengers;
-		int mFlightNum = kFirstFlight;
+		int mNextFlightNum = kFirstFlightNum;
 		
 
 	};

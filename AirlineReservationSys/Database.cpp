@@ -19,7 +19,7 @@ namespace AirlineReservationSys {
 		const std::string& FromCity,
 		const std::string& ToCity) {
 		FlightDB theFlight(Airlines, FromCity, ToCity);
-		theFlight.setFlightNumber(mFlightNum++);
+		theFlight.setFlightNumber(mNextFlightNum++);
 		mFlights.push_back(theFlight);
 		return mFlights[mFlights.size() - 1];
 
@@ -45,22 +45,26 @@ namespace AirlineReservationSys {
 				flight.displayFlightInfo();
 				return flight;
 			}
-			
-			throw logic_error("No matching flight found. ");
 		}
+		throw logic_error("No matching flight found. ");
 	}
+
 
 	FlightDB& Database::getMatchingFlight(int FlightNum)
 	{
 		for (auto& flight : mFlights) {
-			if (flight.getFlightNumber() == FlightNum)
+			if(flight.getFlightNumber() == FlightNum)
 			{
 				flight.displayFlightInfo();
 				return flight;
 			}
-			throw logic_error("No matching flight found. ");
+			
+		
 		}
+		throw logic_error("No matching flight found. ");
 	}
+
+
 
 
 	Passenger& Database::getPassenger(const std::string& firstName,
